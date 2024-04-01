@@ -30,6 +30,9 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    newFileList.forEach(file => {
+      file.status = 'done';
+    });
     setFileList(newFileList);
   };
 
@@ -78,7 +81,7 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
       const response = await fetch("http://localhost:3000/api/v1/products", {
         method: "POST",
         body: formData,
-      });
+      },);
       console.log(response);
       if (response.ok) {
         message.success("Product Created");
@@ -111,21 +114,21 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
           label="Product Images"
           valuePropName="fileList"
           getValueFromEvent={(e) => normFile(e)}
-          rules={[{ required: true, message: "Please upload product image " }]}
         >
-          <ImgCrop rotationSlider>
+            <ImgCrop rotationSlider>
             <Upload
               action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
               listType="picture"
               fileList={fileList}
               onChange={handleChange}
               onPreview={onPreview}
+              multiple
             >
               {fileList.length < 3 && (
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
               )}
             </Upload>
-          </ImgCrop>
+            </ImgCrop>
         </Form.Item>
         <Form.Item
           name="name"

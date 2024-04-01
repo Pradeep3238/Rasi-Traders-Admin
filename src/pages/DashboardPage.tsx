@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AddProductModal from "../components/DashBoard/AddProductModal";
-
 import Product from "../components/DashBoard/Product";
 
 
@@ -34,7 +33,7 @@ const DashboardPage: React.FC = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [products]);
 
 
   return (

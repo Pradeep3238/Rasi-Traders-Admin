@@ -17,7 +17,7 @@ const { Header, Content, Sider } = Layout;
 
 const items2: MenuProps["items"] = [
   {
-    key: "Dashboard",
+    key: "",
     label: "Dashboard",
     icon: <HomeOutlined />,
   },
@@ -86,7 +86,7 @@ const CommonLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
         >
           <Menu
             mode="vertical"
-            defaultSelectedKeys={["Dashboard"]}
+            defaultSelectedKeys={[""]}
             defaultOpenKeys={["Dashboard"]}
             style={{ height: "100%" }}
             items={items2}
