@@ -6,6 +6,7 @@ import CustomersPage from "./pages/CustomersPage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import CommonLayout from "./pages/CommonLayout";
+import SignupPage from "./pages/SignupPage";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     ]
   },
   { path: "/login", element: <LoginPage /> },
+  { path: "/signup", element: <SignupPage /> }
 ])
 
 const App = () => {

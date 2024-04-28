@@ -10,6 +10,7 @@ import type { MenuProps } from "antd";
 import { Layout, Menu, theme, Image, Button } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo2.png";
+import useLogout from "../hooks/useLogout";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -42,9 +43,15 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const {logout} = useLogout();
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const logoutHandler = ()=>{
+    logout();
+  }
 
   const selectedkey = location.pathname.slice(1)
   return (
@@ -60,7 +67,7 @@ const App: React.FC = () => {
         <div>
           <Image preview={false} src={logo} height={45} />
         </div>
-        <Button icon={<LogoutOutlined/>} size="large" type="text" style={{float:'right'}}>Logout</Button>
+        <Button icon={<LogoutOutlined/>} size="large" type="text" style={{float:'right'}} onClick={logoutHandler}>Logout</Button>
       </Header>
       <Layout>
         <Sider
