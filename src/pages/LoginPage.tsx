@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { Button, Form, Input, Typography, Image, Spin } from "antd";
 import {
-  UserOutlined,
   MailOutlined,
   LockOutlined,
   KeyOutlined,
@@ -17,7 +16,7 @@ const { Paragraph, Title } = Typography;
 const LoginPage = () => {
   const [step, setStep] = useState(1); // Initial step
   const [formData, setFormData] = useState({}); // State to hold form dataconst 
-  const { loginUser, loading, error } = useLogin();
+  const { loginUser, loading } = useLogin();
   // Handle form submission for step 1 (basic user details)
   const handleStep1Submit = (values: any) => {
     setFormData({ ...formData, ...values }); // Update form data
