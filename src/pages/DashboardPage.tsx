@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, message } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AddProductModal from "../components/DashBoard/AddProductModal";
 import Product from "../components/DashBoard/Product";
@@ -17,6 +17,7 @@ const DashboardPage: React.FC = () => {
     setOpen(false);
   };
 
+  useEffect(()=>message.success('Welcome Admin'),[])
   useEffect(() => {
     const fetchProducts = async () => {
       try {

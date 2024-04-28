@@ -1,11 +1,11 @@
 // Product component file
 
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Card, Typography, Carousel, message, Button, Popconfirm } from "antd";
-import styles from "./product.module.scss";
 import { useState } from "react";
+import { Card, Typography, Carousel, message, Button, Popconfirm, Flex,Tag } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import styles from "./product.module.scss";
 import EditProductModal from "./EditProductModal ";
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 
 const handleDelete = async (productId: any) => {
   try {
@@ -68,11 +68,68 @@ const Product: React.FC<{ data: any }> = ({ data }) => {
         </Popconfirm>,
       ]}
     >
-      <Title level={4}>{data.name}</Title>
-      <h4>{data.price}</h4>
-      <p>{data.color}</p>
-      <p>{data.category}</p>
+      {data.quantity > 0 ? (
+        <Tag
+          color={data.quantity < 20 ? "orange" : "green"}
+          style={{
+            fontSize: 14,
+            position: "absolute",
+            right: 10,
+            top: 10,
+            padding: 3,
+          }}
+        >
+          {data.quantity < 20 ? "Only few left" : "In Stock"}
+        </Tag>
+      ) : (
+        <Tag
+          color="red"
+          style={{
+            fontSize: 14,
+            position: "absolute",
+            right: 10,
+            top: 10,
+            padding: 3,
+          }}
+        >
+          Out of Stock
+        </Tag>
+      )}
 
+      <Title level={3} style={{ margin: 0 }}>
+        {data.name}
+      </Title>
+      <Paragraph style={{ fontFamily: "monospace", margin: 0 }}>
+        ₹<span style={{ fontWeight: "bold" }}>{data.price}</span>/
+        <span style={{ fontSize: 12, fontWeight: "0" }}>{data.unit}</span>
+      </Paragraph>
+
+      <Flex vertical style={{ padding: 0, margin: 0 }}>
+        <Paragraph style={{ margin: "10px 0 0 0" }}>
+          <span style={{ fontWeight: "light", fontFamily: "sans-serif" }}>
+            Category:{" "}
+          </span>
+          {data.category}
+        </Paragraph>
+        <Paragraph style={{ margin: 0 }}>
+          <span style={{ fontWeight: 10, fontFamily: "sans-serif" }}>
+            Description:{" "}
+          </span>
+          {data.description}
+        </Paragraph>
+        <Paragraph style={{ margin: 0 }}>
+          <span style={{ fontWeight: "light", fontFamily: "sans-serif" }}>
+            Brand:{" "}
+          </span>
+          {data.brand}
+        </Paragraph>
+        <Paragraph style={{ margin: "0 0 10px 0" }}>
+          <span style={{ fontWeight: "light", fontFamily: "sans-serif" }}>
+            Material:{" "}
+          </span>
+          {data.material}
+        </Paragraph>
+      </Flex>
       <EditProductModal open={open} onCancel={handleCancel} data={data} />
     </Card>
   );

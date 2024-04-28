@@ -1,21 +1,19 @@
-import React, { ReactNode, useState } from "react";
-import type { MenuProps } from "antd";
-import { Button, Layout, Menu, theme } from "antd";
-import logo from "../assets/react.svg";
+import React, {  useState } from "react";
 import {
   BookOutlined,
-  DoubleLeftOutlined,
-  DoubleRightOutlined,
   HomeOutlined,
   LogoutOutlined,
   ProductOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import type { MenuProps } from "antd";
+import { Layout, Menu, theme, Image, Button } from "antd";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/logo2.png";
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
-const items2: MenuProps["items"] = [
+const items: MenuProps["items"] = [
   {
     key: "",
     label: "Dashboard",
@@ -40,84 +38,69 @@ const items2: MenuProps["items"] = [
   },
 ];
 
-
-
-const CommonLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
+const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
- const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const selectedkey = location.pathname.slice(1)
   return (
-    <Layout >
+    <Layout>
       <Header
         style={{
-          top:0,
           display: "flex",
           alignItems: "center",
+          justifyContent:'space-between',
           backgroundColor: "white",
-          position: "fixed", // Set header to have a fixed position
-          width: "100%", // Ensure header spans the full width
-          zIndex: 1000, // Ensure header is above other elements
         }}
       >
-
-        <div style={{ display: "flex" }}>
-          <img src={logo} alt="" />{" "}
-          <span style={{ paddingLeft: 10 }}>Rasi Traders</span>
+        <div>
+          <Image preview={false} src={logo} height={45} />
         </div>
-
-        <div style={{ flex: "1 1 0%" }}>
-          <Button style={{ float: "right" }} type="text">
-            <LogoutOutlined />
-            Logout
-          </Button>
-        </div>
-
+        <Button icon={<LogoutOutlined/>} size="large" type="text" style={{float:'right'}}>Logout</Button>
       </Header>
-
-      <Layout hasSider>
+      <Layout>
         <Sider
-          trigger={null}
+          width={200}
+          style={{ background: colorBgContainer, paddingTop:20 }}
           collapsible
           collapsed={collapsed}
-          style={{ overflow: "auto", height: "100vh", position:'fixed', zIndex: 999, top:64 }} // Set z-index to ensure Sider appears above the Content
+          onCollapse={(value) => setCollapsed(value)}
         >
           <Menu
-            mode="vertical"
+            mode="inline"
             defaultSelectedKeys={[""]}
-            defaultOpenKeys={["Dashboard"]}
-            style={{ height: "100%" }}
-            items={items2}
-            onSelect={key =>{
-              const path = key.key
-              navigate(path)
+            style={{ height: "100%", borderRight: 0 }}
+            items={items}
+            selectedKeys={[selectedkey]}
+            onSelect={(key) => {
+              const path = key.key;
+              navigate(path);
             }}
           />
         </Sider>
-         <Button
-          type="text"
-          icon={collapsed ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          style={{ marginLeft: collapsed ? 80 : 200, top: 250, position: "fixed", zIndex: 1000 }}
-        />
-        <Layout style={{ marginLeft: collapsed ? 100 : 220}} >
+        <Layout style={{ padding: "0 24px 24px", marginTop: 30 }}>
           <Content
             style={{
               padding: 24,
-              margin: "64px 16px 0", 
+              margin: 0,
+              minHeight: '71.2vh',
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
-              overflow:'initial'
             }}
           >
-            {children}
+            <Outlet />
           </Content>
+          <Footer style={{ textAlign: "center" }}>
+            Rasi Traders ©{new Date().getFullYear()} Created by Pradeep
+          </Footer>
         </Layout>
       </Layout>
     </Layout>
   );
 };
 
-export default CommonLayout;
+export default App;

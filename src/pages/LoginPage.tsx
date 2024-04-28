@@ -7,10 +7,6 @@ const LoginPage: React.FC = () => {
     console.log("Received values of form: ", values);
   };
 
-  const loginWithGoogle = () =>{
-    window.open('http://localhost:3000/auth/google/callback','_self')
-  }
-
   return (
     <Card style={{width:300}} title= {<h2>Admin Login</h2>}>
 
@@ -44,9 +40,6 @@ const LoginPage: React.FC = () => {
           Log in
         </Button>
       </Form.Item>
-        <Button type="primary" onClick={loginWithGoogle}>
-          SignUp with google
-        </Button>
     </Form>
     </Card>
   );

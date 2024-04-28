@@ -85,11 +85,13 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
       console.log(response);
       if (response.ok) {
         message.success("Product Created");
+        onCancel();
       } else {
         throw new Error("Failed to create product");
       }
     } catch (error: any) {
       message.error("Check the entered values");
+      console.log(error)
     }
   };
 
@@ -170,7 +172,7 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
             <Form.Item
               name={["unit"]}
               noStyle
-              rules={[{ required: true, message: "Province is required" }]}
+              rules={[{ required: true, message: "unit is required" }]}
             >
               <Select placeholder="Unit">
                 <Option value="sqft">per sqFeet</Option>

@@ -1,25 +1,29 @@
 
-import {  Routes, Route, BrowserRouter } from "react-router-dom";
+import {  createBrowserRouter, RouterProvider } from "react-router-dom";
 import FeedbacksPage from "./pages/FeedbacksPage";
 import OrdersPage from "./pages/OrdersPage";
 import CustomersPage from "./pages/CustomersPage";
-import CommonLayout from "./pages/CommonLayout";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
+import CommonLayout from "./pages/CommonLayout";
+
+const router = createBrowserRouter([
+  {
+    path:'/',
+    element:<CommonLayout />,
+    children:[
+      {path:'/',element:<DashboardPage/>},
+      {path:'/feedbacks', element:<FeedbacksPage/>},
+      {path:'/orders',element:<OrdersPage/>},
+      {path:'/customers',element:<CustomersPage/>}
+    ]
+  },
+  { path: "/login", element: <LoginPage /> },
+])
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <CommonLayout>
-        <Routes>
-          <Route path='/' element={<DashboardPage />} />
-          <Route path="/feedbacks" element={<FeedbacksPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
-          <Route path="/customers" element={<CustomersPage />} />
-          <Route path='/login' element={<LoginPage/>} />
-        </Routes>
-      </CommonLayout>
-    </BrowserRouter>
+    <RouterProvider router={router}/>
   );
 };
 

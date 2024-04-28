@@ -91,7 +91,7 @@ const EditProductModal: React.FC<{
             <Form.Item
               name={["price"]}
               noStyle
-              rules={[{ required: true, message: "Price is required" }]}
+              rules={[{ required: true, message: "Price is required" }, {type:'number'}]}
             >
               <Input style={{ width: "50%" }} placeholder="Price" />
             </Form.Item>
@@ -112,7 +112,7 @@ const EditProductModal: React.FC<{
         <Form.Item
           name="quantity"
           label="Quantity"
-          rules={[{ required: true, message: "Please enter current stock" }]}
+          rules={[{ required: true, message: "Please enter current stock" },{type:'number'}]}
         >
           <Input placeholder="Stock (nos)" />
         </Form.Item>
