@@ -22,8 +22,12 @@ const CustomersPage: React.FC = () => {
           userName: user.userName,
           email:user.email,
           contact:user.phoneNumber,
-          shippingAddress: user.shippingAddress?.city,
-          orders:user.orders
+          address: `${user.shippingAddress?.street}, ${user.shippingAddress?.city}, ${user.shippingAddress?.zip}`,
+          orders:user.orders.map((order:any)=>(
+            <div>
+              • {order}
+            </div>
+          ))
         }));
         setUserData(formattedData);
       } catch (error) {
@@ -48,9 +52,9 @@ const CustomersPage: React.FC = () => {
       key: "contact",
     },
     {
-      title: "Shipping Address",
-      dataIndex: "shippingAddress",
-      key: "shippingAddress",
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
       title: "Orders",
