@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Spin, Table, Tag } from "antd";
+import { Table } from "antd";
 
 
 const CustomersPage: React.FC = () => {
