@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Row, message } from "antd";
+import { Button, Col, Row, Spin } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import AddProductModal from "../components/DashBoard/AddProductModal";
 import Product from "../components/DashBoard/Product";
 
-
-
 const DashboardPage: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const showModal = () => {
     setOpen(true);
   };
@@ -17,11 +15,12 @@ const DashboardPage: React.FC = () => {
     setOpen(false);
   };
 
-  useEffect(()=>message.success('Welcome Admin'),[])
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/products/`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/products/`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch products");
@@ -30,12 +29,13 @@ const DashboardPage: React.FC = () => {
         setProducts(data.data);
       } catch (error) {
         console.log("Error fetching products:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProducts();
   }, [products]);
-
 
   return (
     <>
@@ -45,14 +45,15 @@ const DashboardPage: React.FC = () => {
           <PlusCircleOutlined /> Add Product{" "}
         </Button>
       </div>
-
-      <Row gutter={[32, 32]} style={{ marginTop: 50 }}>
-        {products.map((product, index) => (
-          <Col key={index} span={8} style={{ marginBottom: 16 }}>
-            <Product data={product} />
-          </Col>
-        ))}
-      </Row>
+      <Spin spinning={loading} size="large">
+        <Row gutter={[32, 32]} style={{ marginTop: 50 }}>
+          {products.map((product, index) => (
+            <Col key={index} span={8} style={{ marginBottom: 16 }}>
+              <Product data={product} />
+            </Col>
+          ))}
+        </Row>
+      </Spin>
 
       <AddProductModal open={open} onCancel={handleCancel} />
     </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Popconfirm, Table, Tag, message } from "antd";
+import { Button, Popconfirm, Spin, Table, Tag, message } from "antd";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 
 interface Order {
@@ -12,6 +12,7 @@ interface Order {
 }
 const OrdersPage: React.FC = () => {
   const [orderData, setOrderData] = useState<Order[]>();
+  const [loading,setLoading]= useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -44,6 +45,8 @@ const OrdersPage: React.FC = () => {
         setOrderData(formattedData);
       } catch (error) {
         console.log("Error fetching orders:", error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -183,9 +186,9 @@ const OrdersPage: React.FC = () => {
   ];
 
   return (
-    <>
+    <Spin spinning={loading} size="large">
       <Table columns={columns} dataSource={orderData} />
-    </>
+    </Spin>
   );
 };
 
