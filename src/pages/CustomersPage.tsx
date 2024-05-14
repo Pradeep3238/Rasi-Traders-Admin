@@ -23,11 +23,14 @@ const CustomersPage: React.FC = () => {
           email:user.email,
           contact:user.phoneNumber,
           address: `${user.shippingAddress?.street}, ${user.shippingAddress?.city}, ${user.shippingAddress?.zip}`,
-          orders:user.orders.map((order:any)=>(
-            <div>
-              • {order}
-            </div>
-          ))
+          noOfOrders:`${user.orders.reduce((acc:any,order:any)=>{
+            acc+=order.totalQuantity
+            return(acc)
+          },0)} items`,
+          ordersAmt:`₹ ${user.orders.reduce((acc:any,order:any)=>{
+            acc+=order.billAmount
+            return(acc)
+        },0)}`,
         }));
         setUserData(formattedData);
       } catch (error) {
@@ -57,11 +60,15 @@ const CustomersPage: React.FC = () => {
       key: "address",
     },
     {
-      title: "Orders",
-      dataIndex: "orders",
-      key: "orders",
+      title: "No.of Items ordered",
+      dataIndex: "noOfOrders",
+      key: "noOfOrders",
+    },
+    {
+      title: "Total purchase amount",
+      dataIndex: "ordersAmt",
+      key: "ordersAmt",
     }
-    
   ];
 
   return (
