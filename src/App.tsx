@@ -6,7 +6,6 @@ import DashboardPage from './pages/DashboardPage';
 import FeedbacksPage from './pages/FeedbacksPage';
 import OrdersPage from './pages/OrdersPage';
 import CustomersPage from './pages/CustomersPage';
-import ProductsPage from './pages/ProductsPage';
 import LoginPage from './pages/LoginPage';
 import CommonLayout from './pages/CommonLayout';
 import SignupPage from './pages/SignupPage';
@@ -18,7 +17,6 @@ const router = createBrowserRouter([
     element: <CommonLayout />,
     children: [
       { path: '/', element: <ProtectedRoute element={<DashboardPage />} /> },
-      { path: '/products', element: <ProtectedRoute element={<ProductsPage />} /> },
       { path: '/feedbacks', element: <ProtectedRoute element={<FeedbacksPage />} /> },
       { path: '/orders', element: <ProtectedRoute element={<OrdersPage />} /> },
       { path: '/customers', element: <ProtectedRoute element={<CustomersPage />} /> },

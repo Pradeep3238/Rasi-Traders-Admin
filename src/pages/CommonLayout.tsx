@@ -3,7 +3,6 @@ import {
   BookOutlined,
   HomeOutlined,
   LogoutOutlined,
-  ProductOutlined,
   TruckOutlined,
   UserOutlined,
 } from "@ant-design/icons";
@@ -17,14 +16,9 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
-    key: "",
+    key: "/",
     label: "Dashboard",
     icon: <HomeOutlined />,
-  },
-  {
-    key: "Products",
-    label: "Products",
-    icon: <ProductOutlined />,
   },
   {
     key: "Orders",
