@@ -16,7 +16,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
-    key: "/",
+    key: "",
     label: "Dashboard",
     icon: <HomeOutlined />,
   },
