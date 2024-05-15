@@ -78,7 +78,7 @@ const AddProductModal: React.FC<{ open: boolean; onCancel: () => void }> = ({
       formData.append("dimensions", values.dimensions);
       formData.append("color", values.color);
 
-      const response = await fetch("http://localhost:3000/api/v1/products", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/products`, {
         method: "POST",
         body: formData,
       },);

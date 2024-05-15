@@ -4,6 +4,7 @@ import {
   HomeOutlined,
   LogoutOutlined,
   ProductOutlined,
+  TruckOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -21,11 +22,15 @@ const items: MenuProps["items"] = [
     icon: <HomeOutlined />,
   },
   {
-    key: "Orders",
-    label: "Orders",
+    key: "Products",
+    label: "Products",
     icon: <ProductOutlined />,
   },
-
+  {
+    key: "Orders",
+    label: "Orders",
+    icon: <TruckOutlined />,
+  },
   {
     key: "Customers",
     label: "Customers",

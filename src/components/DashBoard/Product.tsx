@@ -11,7 +11,7 @@ const handleDelete = async (productId: any) => {
   try {
     console.log(productId);
     const response = await fetch(
-      `http://localhost:3000/api/v1/products/${productId}`,
+      `${import.meta.env.VITE_API_URL}/products/${productId}`,
       {
         method: "DELETE",
       }

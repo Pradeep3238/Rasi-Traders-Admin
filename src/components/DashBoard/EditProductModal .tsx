@@ -20,7 +20,7 @@ const EditProductModal: React.FC<{
       let values = form.getFieldsValue();
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/products/${productId}`,
+        `${import.meta.env.VITE_API_URL}/products/${productId}`,
         {
           method: "PATCH",
           headers: {
